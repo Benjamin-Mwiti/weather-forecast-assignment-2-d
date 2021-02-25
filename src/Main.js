@@ -1,7 +1,15 @@
-import React from 'react';
-import './Main.css'
+import React, { useState, useEffect } from 'react';
+import './Main.css';
+import Cities, { country_Name } from './Cities';
+
+export const CityContext = React.createContext();
 
 function Main() {
+
+    const [city_Name, setCity_Name] = useState("");
+    console.log(city_Name)
+    // const countryName = useContext(country_Name);
+
     return (
         <div className="app">
       <div className="app__bar">
@@ -11,21 +19,24 @@ function Main() {
         </div>
         <div className="search__container">
           <form>
-            <input type="search" name="city name" /* value={city_name} */ placeholder="Name of your city" 
-              /* onChange = {e => {
+            <input type="search" name="city name" value={city_Name} placeholder="Name of your city" 
+              onChange = {e => {
                 setCity_Name(e.target.value);
-              }} */ />
-            <button type="submit" /* onClick={(e) => {
-              if(city_name == "") {
+              }} />
+            <button type="submit" onClick={(e) => {
+              if(city_Name == "") {
                 alert("The field should not be empty");
               }
               e.preventDefault();
-            }} */ >Search</button>
+            }} >Search</button>
           </form>
         </div>
       </div>
       <div className="app__body">
         <div className="city__forecast">
+          <CityContext.Provider value={city_Name}>
+            <Cities />
+          </CityContext.Provider>
           <span></span>
           <div className="city__stats">
               <p>Toronto, ON</p>
