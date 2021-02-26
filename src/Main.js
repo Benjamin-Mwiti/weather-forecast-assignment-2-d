@@ -33,14 +33,10 @@ function Main() {
           </div>
         </div>
         <div className="app__body">
-          <CityContext.Provider value={city_Name}>
-            <Cities />
-          </CityContext.Provider>
           <div className="city__forecast">
-            {/* <CityContext.Provider value={city_Name}>
+            <CityContext.Provider value={city_Name}>
               <Cities />
-            </CityContext.Provider> */}
-            <span></span>
+            </CityContext.Provider>
             <div className="city__stats">
               <p>Toronto, ON</p>
               <p>Friday 12 February 2021</p>

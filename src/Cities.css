@@ -9,12 +9,20 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 5px 200px;
     border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
 .city__weatherInfo:hover {
     box-shadow: 1px 1px 5px #c3c3c3;
+}
+
+.city__weatherInfo > p* {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
 }
 
 

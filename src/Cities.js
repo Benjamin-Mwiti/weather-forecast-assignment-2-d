@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
+import './Cities.css';
 import { CityContext } from './Main';
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Cities() {
 
+    const [weather_Stats, setWeather_Stats] = useState({});
     const [country_Name, setCountry_Name] = useState("");
     const [search_ID, setSearch_ID] = useState("");
     const [recently_Viewed, setRecently_Viewed] = useState("");
@@ -19,43 +21,51 @@ function Cities() {
     console.log(openWeatherMapURL);
 
     useEffect(() => {
-        $(function() {
             async function getOpenWeatherMapData() {
-                let response;
-                try {
-                    response = await $.ajax({
+                let response = await $.ajax({
                         url: openWeatherMapURL,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
-                            if(isOnline) {
-                                setCountry_Name(data.sys.country);
-                                $(function() {
-                                // $(('.city__weatherInfo p').eq(0)).before(openWeatherMapFlag);
-                                $('.city__weatherInfo').html("<p>" + data.name + "</p><p>Feels like " + data.main.feels_like + " <sup>o</sup>C " + data.weather[0].description + "." + data.weather[0].main + "</p><p><img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />" + data.main.temp + "</p>");
-                                });
-                            } else {
-                                alert("You're not online");
-                            }
+                            return data;
                         },
                         error: (err) => {
-                            console.log(err);
+                            /* 
+                            err.responseJSON.cod
+                            err.responseJSON.message
+                            err.statusCode.statusText
+                             */
+                            console.log(`Error code:${err.responseJSON.cod}\nError message:${err.responseJSON.message}\nStatus text:${err.statusCode.statusText}`);
                         }
                     });
-                } catch(error) {
-                    console.log(error);
-                }
-                finally {
-                    return response;
-                }
+                return response;
             }
             getOpenWeatherMapData()
-                .then(res => {
-                    console.log(res);
-                    return res;
+                .then(data => {
+                    setWeather_Stats(data);
+                })
+                .catch((error) => {
+                  console.log(`Error code:${error.responseJSON.cod}\nError message:${error.responseJSON.message}\nStatus text:${error.statusCode.statusText}`)
                 });
-        });
     }, [cityName]);
+
+    console.log(weather_Stats);
+
+    /* if(isOnline) {
+        for (const city of weather_Stats.name) {
+            if (cityName !== weather_Stats.name[city]) {
+                console.log(weather_Stats.name[city]);
+                // $(('.city__weatherInfo p').eq(0)).before(openWeatherMapFlag);
+                $('.city__weatherInfo').html(`<p>${weather_Stats.name[city]}, ${weather_Stats.sys.country[city]}</p><p>Feels like ${weather_Stats.main.feels_like[city]} <sup>o</sup>C ${weather_Stats.weather[0].description[city]}.${weather_Stats.weather[0].main[city]}</p><p><img src=http://openweathermap.org/img/wn/${weather_Stats.weather[0].icon[city]}@2x.png />${weather_Stats.main.temp[city]}</p>`);
+            } else {
+                console.log(weather_Stats.name);
+                // $(('.city__weatherInfo p').eq(0)).before(openWeatherMapFlag);
+                $('.city__weatherInfo').html(`<p>${weather_Stats.name}, ${weather_Stats.sys.country}</p><p>Feels like ${weather_Stats.main.feels_like} <sup>o</sup>C ${weather_Stats.weather[0].description}.${weather_Stats.weather[0].main}</p><p><img src=http://openweathermap.org/img/wn/${weather_Stats.weather[0].icon}@2x.png />${weather_Stats.main.temp}</p>`);
+            }
+        }
+    } else {
+        alert("You're not online");
+    } */
 
     return (
         <div className="cities">
