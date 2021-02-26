@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Main.css';
 import Cities from './Cities';
+import FetchingData from "./FetchingData";
 
-export const CityContext = React.createContext();
+export const CityNameContext = React.createContext();
 
 function Main() {
 
@@ -34,9 +35,10 @@ function Main() {
         </div>
         <div className="app__body">
           <div className="city__forecast">
-            <CityContext.Provider value={city_Name}>
+            <CityNameContext.Provider value={city_Name}>
               <Cities />
-            </CityContext.Provider>
+              <FetchingData />
+            </CityNameContext.Provider>
             <div className="city__stats">
               <p>Toronto, ON</p>
               <p>Friday 12 February 2021</p>

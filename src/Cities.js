@@ -1,21 +1,20 @@
 import React, { useState, useContext } from 'react';
 import './Cities.css';
-import { CityContext } from './Main';
-import { WeatherStatsContext } from './FetchingData';
+import { CityNameContext } from './Main';
+import { WeatherStatsContext, TotalCitiesContext } from './FetchingData';
 import Pagination from './Pagination';
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Cities() {
 
-    const [weather_Stats, setWeather_Stats] = useState({});
-    const [country_Name, setCountry_Name] = useState("");
     const [search_ID, setSearch_ID] = useState();
     const [recently_Viewed, setRecently_Viewed] = useState();
 
-    const cityName = useContext(CityContext);
+    const cityName = useContext(CityNameContext);
     const weatherStats = useContext(WeatherStatsContext);
-    console.log(cityName);
+    const totalCities = useContext(TotalCitiesContext);
+    console.log(totalCities);
 
     let isOnline = window.navigator.onLine;
 
