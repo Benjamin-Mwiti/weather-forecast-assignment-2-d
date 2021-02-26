@@ -7,15 +7,15 @@ function Pagination() {
     const [current_Page, setCurrent_Page] = useState(1);
     const [cityDisplayCount, setCityDisplayCount] = useState(3);
 
-    const cityCount = useContext(CityCountContext);
-    const totalCities = useContext(IdenticalCitiesContext);
-    const pageNumbers = [];
+    let cityCount = useContext(CityCountContext);
+    let totalCities = useContext(IdenticalCitiesContext);
+    const pageCount = [];
     const lastCityIndex = current_Page * cityDisplayCount;
-    const firstCityIndex = lastCityIndex * cityDisplayCount;
-    const currentCitiesDisplayed = cityCount.slice(firstCityIndex, lastCityIndex);
+    const firstCityIndex = lastCityIndex - cityDisplayCount;
+    const currentDisplayedCities = totalCities.slice(firstCityIndex, lastCityIndex);
 
     for (let i = 0; i < Math.ceil(totalCities / cityDisplayCount); i++) {
-        pageNumbers.push(i);
+        pageCount.push(i);
         
     }
 
@@ -24,7 +24,7 @@ function Pagination() {
             <Nav>
                 <ul>
                     {
-                        pageNumbers.map(number => (
+                        pageCount.map(number => (
                             <li key={number}>
                                 <a href="!#">
                                     {number}

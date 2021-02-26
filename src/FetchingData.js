@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Cities from './Cities';
-import Pagination from './Pagination';
+// import Pagination from './Pagination';
 import { CityNameContext } from './Main';
 import $ from 'jquery';
 
@@ -11,13 +11,13 @@ export const IdenticalCitiesContext = React.createContext();
 function FetchingData() {
     
     const [weather_Stats, setWeather_Stats] = useState({});
-    const [totalIdenticalCities, setTotalIdenticalCities] = useState();
+    const [totalIdenticalCities, setTotalIdenticalCities] = useState([]);
     const [country_Name, setCountry_Name] = useState("");
     const [city_Count, setCity_Count] = useState(0);
     console.log(weather_Stats);
     console.log(totalIdenticalCities);
 
-    const cityName = useContext(CityNameContext);
+    let cityName = useContext(CityNameContext);
     
     const openWeatherMapURL = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
     const openWeatherMapFlag = `http://openweathermap.org/images/flags/${country_Name.toLowerCase()}.png`;
@@ -52,12 +52,23 @@ function FetchingData() {
                   console.log(`Error code:${error.responseJSON.cod}\nError message:${error.responseJSON.message}\nStatus text:${error.statusCode.statusText}`)
                 });
             
-            const countIdenticalCities = () => {
+            /* const countIdenticalCities = () => {
                 weather_Stats.name.map(cities => (
                     setTotalIdenticalCities(cities)
                 ));
             };
-            countIdenticalCities();
+            countIdenticalCities(); */
+            
+            /* for(let i = 0; i < 18; i++) {
+                totalIdenticalCities.push(weather_Stats.name[i])
+            }
+            console.log(totalIdenticalCities); */
+            /* weather_Stats.name.every(res => {
+                // totalIdenticalCities.push(res);
+                console.log(res.find(totalIdenticalCities));
+            }) */
+            // console.log(totalIdenticalCities);
+            
         });
     }, [cityName]);
 
@@ -66,7 +77,7 @@ function FetchingData() {
             <CityCountContext.Provider value={ city_Count }>
                 <IdenticalCitiesContext.Provider value={ totalIdenticalCities }>
                     <Cities />
-                    <Pagination />
+                    {/* <Pagination /> */}
                 </IdenticalCitiesContext.Provider>
             </CityCountContext.Provider>
         </WeatherStatsContext.Provider>
