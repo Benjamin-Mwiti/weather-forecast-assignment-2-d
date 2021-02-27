@@ -15,12 +15,45 @@ function Cities() {
     const [totalIdenticalCities, setTotalIdenticalCities] = useState([]);
     const [country_Name, setCountry_Name] = useState("");
     const [city_Count, setCity_Count] = useState(0);
+    const [latLon, setLatLon] = useState([]);
 
     const cityName = useContext(CityNameContext);
         
     const openWeatherMapURL = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
     // const openWeatherMapFlag = `http://openweathermap.org/images/flags/${country_Name.toLowerCase()}.png`;
     // console.log(openWeatherMapURL);
+
+    useEffect(() => {
+        async function getGeoCoords() {
+            if(navigator.geolocation) {
+                try {
+                    let Location = await navigator.geolocation.getCurrentPosition(currentPosition => {
+                        let Latitude = currentPosition.coords.latitude.toFixed(2);
+                        let Longitude = currentPosition.coords.longitude.toFixed(2);
+                        setLatLon(Latitude, Longitude);
+                    });
+                    return Location;
+                } catch(error) {
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            alert("User denied the request for Geolocation.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            alert("Location information is unavailable.");
+                            break;
+                        case error.TIMEOUT:
+                            alert("The request to get user location timed out.");
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            alert("An unknown error occurred.");
+                            break;
+                        default:
+                            alert(error);
+                }
+            }
+        };
+        getGeoCoords();
+    });
 
     useEffect(() => {
         async function getOpenWeatherMapData() {
@@ -51,7 +84,6 @@ function Cities() {
                 console.log(error)
             });
     }, [cityName]);
-
 
     return (
         <div className="cities">
