@@ -18,9 +18,11 @@ function Cities() {
 
     const DOM_Manipulation = () => {
         if(isOnline) {
-            console.log(weatherStats.name);
+            // console.log(weatherStats.name);
             // $(('.city__weatherInfo p').eq(0)).before(openWeatherMapFlag);
-            $('.city__weatherInfo').html(`<p>${weatherStats.name}, ${weatherStats.sys.country}</p><p>Feels like ${weatherStats.main.feels_like} <sup>o</sup>C ${weatherStats.weather[0].description}.${weatherStats.weather[0].main}</p><p><img src=http://openweathermap.org/img/wn/${weatherStats.weather[0].icon}@2x.png />${weatherStats.main.temp}</p>`);
+            $(function() {
+                $('.city__weatherInfo').html(`<p>${weatherStats.name}, ${weatherStats.sys.country}</p><p>Feels like ${weatherStats.main.feels_like} <sup>o</sup>C ${weatherStats.weather[0].description}.${weatherStats.weather[0].main}</p><p><img src=http://openweathermap.org/img/wn/${weatherStats.weather[0].icon}@2x.png />${weatherStats.main.temp}</p>`);
+            });
         } else {
             alert("You're not online");
         }

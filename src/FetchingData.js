@@ -15,61 +15,28 @@ function FetchingData() {
     const [country_Name, setCountry_Name] = useState("");
     const [city_Count, setCity_Count] = useState(0);
     console.log(weather_Stats);
-    console.log(totalIdenticalCities);
+    // console.log(totalIdenticalCities);
 
     let cityName = useContext(CityNameContext);
+    let nameOfCity = "Paris";
     
     const openWeatherMapURL = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
     const openWeatherMapFlag = `http://openweathermap.org/images/flags/${country_Name.toLowerCase()}.png`;
     // console.log(openWeatherMapURL);
 
     useEffect(() => {
-        $(function() {
-            async function getOpenWeatherMapData() {
-                let response = await $.ajax({
-                        url: openWeatherMapURL,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            return data;
-                        },
-                        error: (err) => {
-                            /* 
-                            err.responseJSON.cod
-                            err.responseJSON.message
-                            err.statusCode.statusText
-                             */
-                            console.log(`Error code:${err.responseJSON.cod}\nError message:${err.responseJSON.message}\nStatus text:${err.statusCode.statusText}`);
-                        }
-                    });
-                return response;
-            }
-            getOpenWeatherMapData()
-                .then(data => {
-                    setWeather_Stats(data);
-                })
-                .catch((error) => {
-                  console.log(`Error code:${error.responseJSON.cod}\nError message:${error.responseJSON.message}\nStatus text:${error.statusCode.statusText}`)
-                });
-            
-            /* const countIdenticalCities = () => {
-                weather_Stats.name.map(cities => (
-                    setTotalIdenticalCities(cities)
-                ));
-            };
-            countIdenticalCities(); */
-            
-            /* for(let i = 0; i < 18; i++) {
-                totalIdenticalCities.push(weather_Stats.name[i])
-            }
-            console.log(totalIdenticalCities); */
-            /* weather_Stats.name.every(res => {
-                // totalIdenticalCities.push(res);
-                console.log(res.find(totalIdenticalCities));
-            }) */
-            // console.log(totalIdenticalCities);
-            
-        });
+        async function getOpenWeatherMapData() {
+            const fetchedData = await fetch(openWeatherMapURL);
+            const Data = await fetchedData.json();
+            return Data;
+        }
+        getOpenWeatherMapData()
+            .then(response => {
+                setWeather_Stats(response);
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     }, [cityName]);
 
     return (
