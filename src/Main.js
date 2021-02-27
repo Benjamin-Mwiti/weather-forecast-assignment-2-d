@@ -37,7 +37,6 @@ function Main() {
           <div className="city__forecast">
             <CityNameContext.Provider value={city_Name}>
               <Cities />
-              <FetchingData />
             </CityNameContext.Provider>
             <div className="city__stats">
               <p>Toronto, ON</p>
