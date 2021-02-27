@@ -71,6 +71,7 @@
   .city__forecast {
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 30px;
@@ -78,7 +79,7 @@
 
   .city__stats {
     position: relative;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;

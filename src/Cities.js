@@ -23,7 +23,7 @@ function Cities() {
     // const openWeatherMapFlag = `http://openweathermap.org/images/flags/${country_Name.toLowerCase()}.png`;
     // console.log(openWeatherMapURL);
 
-    useEffect(() => {
+ /*    useEffect(() => {
         async function getGeoCoords() {
             if(navigator.geolocation) {
                 try {
@@ -53,7 +53,7 @@ function Cities() {
             }
         };
         getGeoCoords();
-    });
+    }); */
 
     useEffect(() => {
         async function getOpenWeatherMapData() {

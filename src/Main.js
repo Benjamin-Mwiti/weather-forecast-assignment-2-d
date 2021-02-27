@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Main.css';
 import Cities from './Cities';
 import FetchingData from "./FetchingData";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export const CityNameContext = React.createContext();
 
@@ -40,7 +41,7 @@ function Main() {
             </CityNameContext.Provider>
             <div className="city__stats">
               <p>Toronto, ON</p>
-              <p>Friday 12 February 2021</p>
+              <p>Friday 26 February 2021</p>
               <p>-15<sup>o</sup>C</p>
               <p>Cloudy</p>
               <p>-13<sup>o</sup>C / -16<sup>o</sup>C</p>
