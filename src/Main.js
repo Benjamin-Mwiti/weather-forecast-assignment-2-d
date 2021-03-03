@@ -38,8 +38,8 @@ function Main() {
                   setCity_Name(e.target.value);
                 }} />
               <Router>
-                <Link to={`/${cityID}`} >
-                  <button id="button" type="submit" onClick={ e => {
+                <Link to="cities" >
+                  <button to="cities" id="button" type="submit" onClick={ e => {
                     if(city_Name == "") {
                       alert("The field should not be empty");
                     }
@@ -56,9 +56,9 @@ function Main() {
             <Router>
               <Switch>
                 <Route path="/" exact component={ CurrentLocation } />
-                  <CityNameContext.Provider value={city_Name}>
-                    <Route path={`/${cityID}`} component={Cities} />
-                  </CityNameContext.Provider>
+                {/* <CityNameContext.Provider value={city_Name}>
+                  <Route path="cities" component={Cities} />
+                </CityNameContext.Provider> */}
               </Switch>
             </Router>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CurrentLocation.css';
+import $ from 'jquery';
 
 function CurrentLocation() {
     
@@ -51,12 +52,26 @@ function CurrentLocation() {
         }
     }, []);
 
+    $(function() {
+        const currentDate = new Date();
+        const day = currentDate.getDay();
+        const date = currentDate.getDate();
+        const month = currentDate.getMonth();
+        const year = currentDate.getFullYear();
+        console.log(day, date, month, year);
+        
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        $('p').eq(1).text(`${days[day]} ${date} ${months[month]} ${year}`);
+    });
+
     return (
         <div className="current__location">
-            <p>Toronto, ON</p>
-              <p>Friday 26 February 2021</p>
-              <p>-15<sup>o</sup>C</p>
-              <p>Cloudy</p>
+            <p>Toronto, CA</p>
+            <p></p>
+            <p>-15<sup>o</sup>C</p>
+            <p>Cloudy</p>
             <p>-13<sup>o</sup>C / -16<sup>o</sup>C</p>
         </div>
     )
