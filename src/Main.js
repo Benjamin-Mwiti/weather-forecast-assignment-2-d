@@ -10,10 +10,19 @@ export const CityNameContext = React.createContext();
 function Main() {
 
     const [city_Name, setCity_Name] = useState("");
-    console.log(city_Name);
+    console.log(city_Name)
     // const countryName = useContext(country_Name);
 
     const cityID = useContext(CityIdContext);
+
+    const Cities = () => {
+      return () => {
+        <CityNameContext.Provider value={city_Name}>
+          <Cities />
+        </CityNameContext.Provider>
+      }
+    }
+    Cities();
 
     return (
       <div className="app">
@@ -24,19 +33,20 @@ function Main() {
           </div>
           <div className="search__container">
             <form>
-              <input type="search" name="city_name" value={city_Name} placeholder="Name of your city" onChange={e => setCity_Name(e.target.value)}
-                onSubmit={e => {
-                  if(city_Name !== "") {
-                    setCity_Name("");
-                    e.preventDefault();
-                  } else {
-                    alert("The field should not be empty");
-                  }
+              <input type="search" name="city name" value={city_Name} placeholder="Name of your city" 
+                onChange = {e => {
+                  setCity_Name(e.target.value);
                 }} />
               <Router>
-                {/* <Link to={`/${cityID}`} > */}
-                  <button component={ Link } to={`/${cityID}`} id="button" type="submit" onClick={e => {}} >Search</button>
-                {/* </Link> */}
+                <Link to={`/${cityID}`} >
+                  <button id="button" type="submit" onClick={ e => {
+                    if(city_Name == "") {
+                      alert("The field should not be empty");
+                    }
+                    setCity_Name("");
+                    e.preventDefault();
+                  }} >Search</button>
+                </Link>
               </Router>
             </form>
           </div>
@@ -46,9 +56,9 @@ function Main() {
             <Router>
               <Switch>
                 <Route path="/" exact component={ CurrentLocation } />
-                <CityNameContext.Provider value={ city_Name }>
-                  <Route path={`/${cityID}`} component={ Cities } />
-                </CityNameContext.Provider>
+                  <CityNameContext.Provider value={city_Name}>
+                    <Route path={`/${cityID}`} component={Cities} />
+                  </CityNameContext.Provider>
               </Switch>
             </Router>
           </div>
