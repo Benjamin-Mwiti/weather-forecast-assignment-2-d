@@ -11,7 +11,7 @@
     flex-direction: column;
     width: 100%;
     min-height: 30vh;
-    margin-bottom: 8vh;
+    margin-bottom: 4vh;
   }
   
   .app__bar > .app__title {
@@ -56,7 +56,7 @@
     font-size: 1em;
   }
   
-  .search__container > form > button {
+  #button {
     width: 16vw;
     height: 8vh;
     border-radius: 0 20vw 20vw 0;
@@ -76,53 +76,4 @@
     justify-content: center;
     padding: 30px;
   }
-
-  .city__stats {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 80px;
-    border: .8px solid #ccc;
-    border-radius: 10px;
-    box-shadow: none;
-
-    transition: box-shadow 150ms linear;
-  }
-
-  .city__stats:hover {
-      box-shadow: 1px 1px 5px #c3c3c3;
-  }
-
-  .city__stats > p {
-      position: relative;
-      display: flex;
-  }
-
-  .city__stats > p:nth-child(1) {
-      font-size: 1.8rem;
-      font-family: Adobe Fangsong Std R;
-  }
-
-  .city__stats > p:nth-child(2) {
-    font-size: 1.4rem;
-  }
-
-  .city__stats > p:nth-child(3) {
-    margin: 20px;
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-shadow: 3px 3px rgb(139, 139, 139);
-  }
-
-  .city__stats > p:nth-child(4) {
-    font-size: 2rem;
-    font-weight: 600;
-  }
-
-  .city__stats > p:nth-child(5) {
-    font-size: 1.5rem;
-  }
-  
 
