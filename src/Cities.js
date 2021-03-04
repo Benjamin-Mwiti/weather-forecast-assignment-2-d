@@ -30,15 +30,27 @@ function Cities() {
         let isMounted = true;
         $(function() {
             const getOpenWeatherMapData = async () => {
-                const result = (await fetch(openWeatherMapURL)).json();
-                return result;
+                let response = await $.ajax({
+                    url: openWeatherMapURL,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        return data;
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                });
+                return response;
+                /* const result = (await fetch(openWeatherMapURL)).json();
+                return result; */
             }
             getOpenWeatherMapData()
-                .then(response => {
-                    setWeather_Stats(response);
-                    setCity_ID(response.id);
-                    console.log(response);
-                    console.log(response.id);
+                .then(fectchedData => {
+                    setWeather_Stats(fectchedData);
+                    setCity_ID(fectchedData.id);
+                    console.log(fectchedData);
+                    console.log(fectchedData.id);
                 })
                 .catch((error) => {
                     console.log(error)
@@ -52,7 +64,7 @@ function Cities() {
     return (
         <div className="cities">
             <CityCountContext.Provider value={ city_ID }>
-                <Main />
+                {/* <Main /> */}
             </CityCountContext.Provider>
             {/* <CityCountContext.Provider value={ city_Count }>
                 <IdenticalCitiesContext.Provider value={ totalIdenticalCities }>
